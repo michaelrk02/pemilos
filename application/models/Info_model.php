@@ -11,9 +11,15 @@ class Info_model extends CI_Model {
     /* read functions */
 
     public function get() {
-        $this->db->select('*')->from('info');
+        //$this->db->select('*')->from('info');
+        //return fetch($this->db);
 
-        return fetch($this->db);
+        return (object)[
+            'admin_password' => md5(PEMILOS_PASSWORD),
+            'year' => PEMILOS_YEAR,
+            'theme' => PEMILOS_THEME,
+            'voters' => PEMILOS_VOTERS
+        ];
     }
 
 }
