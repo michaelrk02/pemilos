@@ -1,5 +1,5 @@
         </div>
-        <footer>
+        <footer class="w3-theme">
             <div class="w3-cell-row w3-padding">
                 <div class="w3-cell w3-cell-middle">
                     <img src="<?php echo base_url('public/img/logo-kpu.png'); ?>" width="100px" height="100px">

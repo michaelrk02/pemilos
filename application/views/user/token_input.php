@@ -10,7 +10,7 @@
                 </div>
                 <div class="w3-section">
                     <label for="token">Token:</label>
-                    <input v-bind:type="tokenInputType" class="w3-input w3-border" id="token" name="token" placeholder="Masukkan token yang telah diberikan">
+                    <input v-bind:type="tokenInputType" class="w3-input w3-border" style="font-family: monospace" id="token" name="token" placeholder="Masukkan token yang telah diberikan">
                     <div>
                         <input v-model="showToken" type="checkbox" class="w3-check">
                         &nbsp;Perlihatkan token

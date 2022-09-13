@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 
         $this->load->helper('form');
         $this->load->helper('status');
+        $this->load->helper('string');
         $this->load->helper('url');
 
         $this->load->library('form_validation');
@@ -20,7 +21,7 @@ class Admin extends CI_Controller {
     }
 
     public function index() {
-        redirect(site_url('admin/results'));
+        redirect(site_url('admin/control'));
     }
 
     public function auth() {
@@ -48,6 +49,70 @@ class Admin extends CI_Controller {
         $this->render('templates/header');
         $this->render('admin/auth');
         $this->render('templates/footer');
+    }
+
+    public function logout() {
+        unset($_SESSION['pemilos_admin']);
+        redirect(site_url('admin/auth'));
+    }
+
+    public function control() {
+        $this->auth_check();
+
+        $this->data['tokens'] = $this->users_model->count_tokens();
+
+        $this->render('templates/header');
+        $this->render('admin/control');
+        $this->render('templates/footer');
+    }
+
+    public function tokens() {
+        $this->auth_check();
+
+        $this->data['tokens'] = $this->users_model->get_tokens();
+
+        $this->render('admin/tokens');
+    }
+
+    public function generate() {
+        $this->auth_check();
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $dict = [
+                'abcdefghjiklmnopqrstuvwxyz',
+                '0123456789'
+            ];
+            $count = $this->input->post('count');
+            for ($i = 0; $i < $count; $i++) {
+                $token = '';
+                do {
+                    $token = '';
+                    for ($j = 0; $j < 8; $j++) {
+                        $set = random_int(0, count($dict) - 1);
+                        $char = random_int(0, strlen($dict[$set]) - 1);
+                        $token .= $dict[$set][$char];
+                    }
+                } while ($this->users_model->get($token) !== NULL);
+                $this->users_model->insert($token);
+            }
+
+            redirect(site_url('admin/control'));
+        } else {
+            die('Invalid request');
+        }
+    }
+
+    public function reset() {
+        $this->auth_check();
+
+        $t = $this->input->get('t');
+        if (empty($t) || (time() >= $t + 3600)) {
+            die('Reset failed. Please try again (refresh the page first before clicking the reset button)');
+        }
+
+        $this->users_model->reset();
+
+        redirect(site_url('admin/control'));
     }
 
     public function results() {

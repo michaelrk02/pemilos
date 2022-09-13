@@ -5,8 +5,8 @@
         <link rel="stylesheet" href="<?php echo base_url('public/w3.css'); ?>">
         <link rel="stylesheet" href="<?php echo base_url('public/w3-theme.css'); ?>">
     </head>
-    <body class="w3-theme">
-        <div class="w3-light-gray">
+    <body class="w3-light-gray" style="display: flex; flex-direction: column; min-height: 100vh">
+        <div style="flex: 1 0 auto">
             <header class="w3-theme">
                 <div class="w3-cell-row w3-padding">
                     <div class="w3-cell w3-cell-middle">
