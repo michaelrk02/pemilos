@@ -1,2 +1,3 @@
 update/
 *.tar.gz
+/env.php

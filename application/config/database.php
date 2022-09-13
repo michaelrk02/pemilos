@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'admin',
-	'password' => '',
-	'database' => 'pemilos',
+	'hostname' => PEMILOS_DB_HOST,
+	'username' => PEMILOS_DB_USER,
+	'password' => PEMILOS_DB_PASS,
+	'database' => PEMILOS_DB_NAME,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
