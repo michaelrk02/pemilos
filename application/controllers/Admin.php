@@ -88,8 +88,8 @@ class Admin extends CI_Controller {
                 do {
                     $token = '';
                     for ($j = 0; $j < 8; $j++) {
-                        $set = random_int(0, count($dict) - 1);
-                        $char = random_int(0, strlen($dict[$set]) - 1);
+                        $set = mt_rand(0, count($dict) - 1);
+                        $char = mt_rand(0, strlen($dict[$set]) - 1);
                         $token .= $dict[$set][$char];
                     }
                 } while ($this->users_model->get($token) !== NULL);
